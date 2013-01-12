@@ -23,8 +23,9 @@ var _globals = {
             _partialsCache[file] = template;
         
         return template;
-  	} 
+    } 
 };
+var _settings = doT.templateSettings;
 
 function _renderFile(filename, options, cb) {
   'use strict';
@@ -65,6 +66,14 @@ exports.setGlobals = function(globals) {
       throw new Error("Your global uses reserved utility: " + f);
   }
   _globals = globals;
+};
+
+exports.setTemplateSettings = function(settings) {
+  'use strict';
+  for (var f in settings)
+  {
+    _settings[f] = settings[f];
+  }
 };
 
 exports.__express = function(filename, options, cb) {
